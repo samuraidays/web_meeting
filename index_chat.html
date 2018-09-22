@@ -35,30 +35,32 @@
   const newPostRef = firebase.database();
   let room = "room1";
 
+  
   const send = document.getElementById("send");
   const username = document.getElementById("username");
   const text = document.getElementById("text");
-  const output = document.getElementById("output");
+  const output = document.getElementById("output")
 
-  // Msg送信処理
+  //Msg送信処理
   send.addEventListener('click', function(){
-      newPostRef.ref(room).push({
-          username: username.value,
-          text: text.value
-      });
-      text.value = "";
+    newPostRef.ref(room).push({
+        username: username.value,
+        text: text.value
+    });
+    text.value = "";
   });
 
-  // Msg受信処理
+  //Msg受信処理
   newPostRef.ref(room).on("child_added",function(data){
-      const v = data.val();
-      const k = data.key;
-      let str = "";
+    const v = data.val();
+    const k = data.key;
+    let str ="";
 
-      str += '<div class="name">'+ v.username +'</div>';
-      str += '<div class="text">'+ v.text +'</div>';
+    str += '<div class="name">'+ v.username +'</div>';
+    str += '<div class="text">'+ v.text +'</div>';
 
-      output.innerHTML += str;
+    output.innerHTML += str;
+
   });
 </script>    
 
